@@ -61,24 +61,47 @@ git remote add origin https://github.com/<usuario>/dental-angels.git && git push
 
 **Dominio propio**
 
-4. En *Settings → Pages → Custom domain*, escribe `dentalangelsecuador.com` y guarda.
-   El archivo `CNAME` de este repo ya lleva ese valor, así que el despliegue no lo borra.
-5. En el DNS de Cloudflare, crea:
+El DNS de `dentalangelsecuador.com` está en **Bluehost** (ns1/ns2.bluehost.com),
+no en Cloudflare. Se gestiona en *cPanel → Domains → dentalangelsecuador.com → DNS*.
 
-   | Tipo | Nombre | Valor | Proxy |
-   |---|---|---|---|
-   | A | `@` | `185.199.108.153` | **DNS only (nube gris)** |
-   | A | `@` | `185.199.109.153` | **DNS only** |
-   | A | `@` | `185.199.110.153` | **DNS only** |
-   | A | `@` | `185.199.111.153` | **DNS only** |
-   | CNAME | `www` | `<usuario>.github.io` | **DNS only** |
+Zona configurada el 21/08/2026:
 
-6. Espera a que GitHub emita el certificado y marca **Enforce HTTPS**.
+| Tipo | Host | Apunta a | Para qué |
+|---|---|---|---|
+| A | `@` | `185.199.108.153` | GitHub Pages |
+| A | `@` | `185.199.109.153` | GitHub Pages |
+| A | `@` | `185.199.110.153` | GitHub Pages |
+| A | `@` | `185.199.111.153` | GitHub Pages |
+| CNAME | `www` | `paosua86.github.io` | GitHub Pages |
+| MX | `@` | `mx.zoho.com` | **Correo Zoho — no tocar** |
+| MX | `@` | `mx2.zoho.com` | **Correo Zoho — no tocar** |
+| MX | `@` | `mx3.zoho.com` | **Correo Zoho — no tocar** |
+| TXT | `@` | `v=spf1 include:zoho.com ~all` | **SPF de Zoho — no tocar** |
+| TXT | `@` | `zoho-verification=...` | **Zoho — no tocar** |
+| TXT | `zmail._domainkey` | `v=DKIM1; ...` | **DKIM de Zoho — no tocar** |
 
-> **Ojo con esto:** el proxy de Cloudflare (nube naranja) tiene que estar **apagado**
-> hasta que GitHub emita el certificado, o la validación falla y te quedas con un error
-> de HTTPS. Una vez emitido, puedes encender el proxy si pones el modo SSL en **Full
-> (strict)**; en cualquier otro modo entras en bucle de redirecciones.
+Se eliminaron el comodín `A *` y el `A www` que apuntaban a la página de
+parqueo de Bluehost (`66.81.203.198`).
+
+> **Nunca toques los MX ni los TXT.** Son el correo de Zoho
+> (`hola@` y `empresas@`). Borrar uno tumba el correo del dominio.
+
+**Último paso, cuando el DNS propague** (Bluehost avisa de 24-48 h):
+
+1. *Settings → Pages → Custom domain*: escribir `dentalangelsecuador.com` y guardar.
+   Con despliegue por Actions, el archivo `CNAME` del repo **no** basta: hay que
+   ponerlo aquí a mano. Si el DNS todavía no resuelve a GitHub, el campo se
+   vacía solo al guardar; hay que reintentarlo más tarde.
+2. Esperar a que GitHub emita el certificado y marcar **Enforce HTTPS**.
+
+Comprobar la propagación:
+
+```bash
+nslookup dentalangelsecuador.com 8.8.8.8
+```
+
+Cuando devuelva una IP `185.199.1xx.153` en vez de `66.81.203.198`, ya se puede
+configurar el dominio en GitHub.
 
 **Verificación de Meta:** el dominio debe verificarse en
 *Business Settings → Brand Safety → Domains*. Lo más cómodo es la meta etiqueta:
