@@ -23,10 +23,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Descargar el repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
+      # enablement: true activa Pages y lo pone en modo "GitHub Actions"
+      # por API. Sin esto, el primer push falla con "Get Pages site failed"
+      # porque el workflow corre antes de que Pages exista.
       - name: Configurar Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       # Sitio estático sin build: se sube el repo entero tal cual.
       # El .nojekyll evita que GitHub procese los archivos con Jekyll.
