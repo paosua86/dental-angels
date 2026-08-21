@@ -1,0 +1,12 @@
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+
+# Originales pesados de las fotos: se versiona solo el .webp optimizado
+*.ai
+*.psd
