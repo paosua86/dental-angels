@@ -1,0 +1,766 @@
+/* =============================================================
+   DENTAL ANGELS · styles.css
+   Escrito a mano. Sin build step, sin frameworks.
+   Orden de secciones:
+     1.  Tokens (colores, tipografía, espaciado)
+     2.  Reset y base
+     3.  Utilidades (wrap, sr-only, skip-link, eyebrow)
+     4.  Botones
+     5.  Header y navegación
+     6.  Hero
+     7.  Sección "miedo"
+     8.  Servicios
+     9.  Diseño de sonrisa
+     10. Historia
+     11. Sedes y mapas
+     12. Empresas (B2B)
+     13. FAQ (acordeón)
+     14. Contacto
+     15. Footer
+     16. Botón flotante WhatsApp
+     17. Páginas legales
+     18. Media queries
+     19. prefers-reduced-motion
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   1. TOKENS
+   Paleta cálida: marfil, arena, dorado apagado. Cero azul clínico.
+   ------------------------------------------------------------- */
+:root {
+  /* Color */
+  --c-bg:          #FFFDF8;  /* marfil, fondo principal */
+  --c-bg-warm:     #FCF5E8;  /* crema, secciones alternas */
+  --c-bg-sand:     #F8EBD2;  /* arena, bloques destacados */
+  --c-ink:         #231F20;  /* tinta del logo — texto principal (contraste 15:1 sobre marfil) */
+  --c-ink-soft:    #5C544A;  /* texto secundario (contraste 7:1) */
+  --c-gold:        #DBA628;  /* dorado exacto del logo (solo para superficies, no para texto) */
+  --c-gold-deep:   #8A6410;  /* dorado oscurecido: el del logo no llega a AA en texto */
+  --c-gold-tint:   #F0DEB4;  /* bordes y separadores */
+  --c-wa:          #1E7A4E;  /* verde WhatsApp oscurecido para contraste AA */
+  --c-wa-hover:    #17603D;
+  --c-line:        #EBE0CD;
+  --c-todo-bg:     #FFF2C9;
+  --c-todo-ink:    #6B4E00;
+
+  /* Tipografía */
+  --f-serif: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --f-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Escala fluida */
+  --t-xs:  0.8125rem;
+  --t-sm:  0.9375rem;
+  --t-base: 1.0625rem;
+  --t-lg:  clamp(1.125rem, 0.4vw + 1.05rem, 1.3125rem);
+  --t-h3:  clamp(1.1875rem, 0.6vw + 1.05rem, 1.4375rem);
+  --t-h2:  clamp(1.75rem, 2.2vw + 1.15rem, 2.75rem);
+  --t-h1:  clamp(2.125rem, 4.2vw + 1.1rem, 3.75rem);
+
+  /* Espaciado */
+  --s-1: 0.5rem;
+  --s-2: 1rem;
+  --s-3: 1.5rem;
+  --s-4: 2rem;
+  --s-5: 3rem;
+  --s-6: 4.5rem;
+  --s-7: 6.5rem;
+
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow-soft: 0 1px 2px rgba(44, 40, 35, .04), 0 10px 30px rgba(44, 40, 35, .06);
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --header-h: 68px;
+}
+
+/* -------------------------------------------------------------
+   2. RESET Y BASE
+   ------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--f-sans);
+  font-size: var(--t-base);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+}
+
+img, svg { max-width: 100%; display: block; }
+
+h1, h2, h3 {
+  font-family: var(--f-serif);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--s-3);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--t-h1); }
+h2 { font-size: var(--t-h2); }
+h3 { font-size: var(--t-h3); line-height: 1.25; }
+
+p { margin: 0 0 var(--s-3); }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--c-gold-deep); }
+a:hover { color: var(--c-ink); }
+
+/* Foco visible en todo elemento interactivo */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--c-gold-deep);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* -------------------------------------------------------------
+   3. UTILIDADES
+   ------------------------------------------------------------- */
+.wrap {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: var(--s-3);
+}
+.wrap-narrow { max-width: 780px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: var(--s-2); top: -100px;
+  z-index: 200;
+  background: var(--c-ink); color: #fff;
+  padding: .7rem 1.1rem; border-radius: 0 0 10px 10px;
+  text-decoration: none; font-weight: 600;
+  transition: top .2s var(--ease);
+}
+.skip-link:focus { top: 0; color: #fff; }
+
+.eyebrow {
+  font-size: var(--t-xs);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-gold-deep);
+  margin: 0 0 var(--s-2);
+}
+
+.section-head { max-width: 46rem; margin-bottom: var(--s-5); }
+.section-lead { font-size: var(--t-lg); color: var(--c-ink-soft); }
+
+.center { text-align: center; }
+
+/* Marca visible de dato pendiente. Se elimina al completar el dato. */
+.todo-inline {
+  background: var(--c-todo-bg);
+  color: var(--c-todo-ink);
+  padding: .1em .45em;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: .92em;
+}
+
+/* Ritmo vertical de las secciones */
+main > section { padding-block: var(--s-6); }
+
+/* -------------------------------------------------------------
+   4. BOTONES
+   ------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  font-family: var(--f-sans);
+  font-weight: 600;
+  font-size: var(--t-sm);
+  line-height: 1;
+  padding: .85rem 1.35rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .25s var(--ease), color .25s var(--ease),
+              border-color .25s var(--ease), transform .25s var(--ease);
+}
+.btn-lg { padding: 1.05rem 1.9rem; font-size: var(--t-base); }
+
+.btn-wa { background: var(--c-wa); color: #fff; }
+.btn-wa:hover { background: var(--c-wa-hover); color: #fff; transform: translateY(-1px); }
+
+.btn-ghost { background: transparent; color: var(--c-ink); border-color: var(--c-gold); }
+.btn-ghost:hover { background: var(--c-bg-sand); color: var(--c-ink); }
+
+.btn-dark { background: var(--c-ink); color: #fff; }
+.btn-dark:hover { background: #191612; color: #fff; transform: translateY(-1px); }
+
+.btn .ico { width: 18px; height: 18px; fill: currentColor; flex: none; }
+
+/* -------------------------------------------------------------
+   5. HEADER Y NAVEGACIÓN
+   ------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 253, 248, .92);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: var(--header-h);
+}
+
+.brand { display: inline-flex; flex: none; margin-right: auto; }
+.brand-logo { height: 38px; width: auto; }
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  background: transparent;
+  border: 1px solid var(--c-line);
+  border-radius: 10px;
+  cursor: pointer;
+  order: 3;
+}
+.nav-toggle-bars { display: grid; gap: 4px; }
+.nav-toggle-bars span {
+  display: block; width: 20px; height: 2px;
+  background: var(--c-ink); border-radius: 2px;
+  transition: transform .25s var(--ease), opacity .2s var(--ease);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Móvil: menú desplegable */
+.nav {
+  order: 4;
+  flex-basis: 100%;
+  display: none;
+}
+.nav.is-open { display: block; }
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: var(--s-2) 0 var(--s-3);
+  display: grid;
+  gap: .15rem;
+  border-top: 1px solid var(--c-line);
+}
+.nav-list a {
+  display: block;
+  padding: .7rem .25rem;
+  color: var(--c-ink);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--t-sm);
+  border-radius: 8px;
+}
+.nav-list a:hover { color: var(--c-gold-deep); }
+
+.btn-header { order: 2; padding: .7rem 1.05rem; }
+
+/* -------------------------------------------------------------
+   6. HERO
+   ------------------------------------------------------------- */
+.hero {
+  background:
+    radial-gradient(120% 90% at 85% -10%, var(--c-bg-sand) 0%, rgba(248,235,210,0) 62%),
+    var(--c-bg);
+  padding-block: var(--s-6) var(--s-6);
+  border-bottom: 1px solid var(--c-line);
+}
+.hero-inner { max-width: 46rem; }
+.hero h1 { margin-bottom: var(--s-3); }
+.hero-lead { font-size: var(--t-lg); color: var(--c-ink-soft); max-width: 38rem; }
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+}
+
+.hero-marks {
+  list-style: none;
+  margin: var(--s-5) 0 0;
+  padding: 0;
+  display: grid;
+  gap: .55rem;
+  font-size: var(--t-sm);
+  color: var(--c-ink-soft);
+}
+.hero-marks li { padding-left: 1.4rem; position: relative; }
+.hero-marks li::before {
+  content: "";
+  position: absolute; left: 0; top: .55em;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--c-gold);
+}
+
+/* -------------------------------------------------------------
+   7. SECCIÓN "¿TE DA MIEDO EL DENTISTA?"
+   La más importante del sitio: se le da fondo propio y más aire.
+   ------------------------------------------------------------- */
+.miedo {
+  background: var(--c-bg-warm);
+  padding-block: var(--s-7) !important;
+}
+
+.miedo-grid {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: 1fr;
+}
+
+.miedo-card {
+  background: var(--c-bg);
+  border: 1px solid var(--c-gold-tint);
+  border-radius: var(--radius-lg);
+  padding: var(--s-4);
+}
+.miedo-card h3 { color: var(--c-ink); margin-bottom: var(--s-2); }
+.miedo-card p { color: var(--c-ink-soft); font-size: var(--t-sm); margin: 0; }
+
+.miedo-cierre {
+  margin: var(--s-5) auto var(--s-3);
+  max-width: 38rem;
+  text-align: center;
+  font-size: var(--t-lg);
+  color: var(--c-ink);
+}
+
+/* -------------------------------------------------------------
+   8. SERVICIOS
+   ------------------------------------------------------------- */
+.serv-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: 1fr;
+}
+
+.serv-card {
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--c-line);
+}
+.serv-card h3 { margin-bottom: .5rem; }
+.serv-card p { color: var(--c-ink-soft); font-size: var(--t-sm); margin: 0; }
+
+.serv-nota {
+  margin-top: var(--s-5);
+  padding: var(--s-3) var(--s-4);
+  background: var(--c-bg-warm);
+  border-left: 3px solid var(--c-gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--c-ink-soft);
+  font-size: var(--t-sm);
+}
+
+/* -------------------------------------------------------------
+   9. DISEÑO DE SONRISA (bloque destacado)
+   ------------------------------------------------------------- */
+.sonrisa {
+  background: var(--c-bg-sand);
+  padding-block: var(--s-7) !important;
+}
+.sonrisa-inner {
+  display: grid;
+  gap: var(--s-5);
+  align-items: center;
+}
+.sonrisa-texto p { color: #4A423A; }
+.sonrisa-lista {
+  list-style: none;
+  margin: var(--s-3) 0 var(--s-4);
+  padding: 0;
+  display: grid;
+  gap: .5rem;
+  font-size: var(--t-sm);
+}
+.sonrisa-lista li { padding-left: 1.6rem; position: relative; }
+.sonrisa-lista li::before {
+  content: "";
+  position: absolute; left: 0; top: .45em;
+  width: 10px; height: 10px;
+  border-left: 2px solid var(--c-gold-deep);
+  border-bottom: 2px solid var(--c-gold-deep);
+  transform: rotate(-45deg);
+}
+
+/* -------------------------------------------------------------
+   10. HISTORIA
+   ------------------------------------------------------------- */
+.historia-inner {
+  display: grid;
+  gap: var(--s-5);
+  align-items: center;
+}
+.historia-texto p { color: var(--c-ink-soft); }
+.historia-cita {
+  font-family: var(--f-serif);
+  font-size: var(--t-lg);
+  color: var(--c-ink) !important;
+  border-left: 3px solid var(--c-gold);
+  padding-left: var(--s-3);
+  margin-top: var(--s-4);
+}
+
+/* Fotografías reales */
+.foto {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+/* Retratos verticales: recorte uniforme con encuadre alto para no cortar la cara.
+   Sin uso ahora mismo; queda listo para cuando entren fotos en vertical. */
+.foto-retrato {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+/* Placeholder de imagen — queda disponible para las fotos que aún faltan */
+.media-placeholder {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: repeating-linear-gradient(
+    45deg, #F2E7D6, #F2E7D6 12px, #EDE0CB 12px, #EDE0CB 24px);
+  border: 1px dashed var(--c-gold);
+  border-radius: var(--radius-lg);
+  color: var(--c-todo-ink);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: .08em;
+  line-height: 1.7;
+}
+
+/* -------------------------------------------------------------
+   11. SEDES Y MAPAS
+   ------------------------------------------------------------- */
+.sedes { background: var(--c-bg-warm); }
+
+.sedes-grid {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: 1fr;
+}
+
+.sede-card {
+  background: var(--c-bg);
+  border: 1px solid var(--c-gold-tint);
+  border-radius: var(--radius-lg);
+  padding: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.sede-card h3 { margin: 0; }
+.sede-dir { margin: 0; color: var(--c-ink-soft); font-size: var(--t-sm); line-height: 1.7; }
+.sede-horario { margin: 0; font-size: var(--t-sm); color: var(--c-ink-soft); }
+.sede-card .btn { align-self: flex-start; }
+
+.mapa { border-radius: var(--radius); overflow: hidden; }
+.mapa-frame {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border: 0;
+}
+@media (min-width: 600px) { .mapa-frame { height: 260px; } }
+.mapa-placeholder { aspect-ratio: 16 / 10; border-radius: var(--radius); }
+
+/* Enlace "Abrir en Google Maps" bajo cada mapa */
+.sede-link { margin: 0; font-size: var(--t-sm); }
+
+/* -------------------------------------------------------------
+   12. EMPRESAS (B2B)
+   ------------------------------------------------------------- */
+.empresas {
+  background: var(--c-ink);
+  color: #F3EDE3;
+}
+.empresas-inner { max-width: 46rem; }
+.empresas .eyebrow { color: #EDBE5C; }
+.empresas h2 { color: #FFFDF8; }
+.empresas p { color: #D7CFC3; }
+.empresas .btn-dark {
+  background: #FFFDF8;
+  color: var(--c-ink);
+  margin-top: var(--s-2);
+}
+.empresas .btn-dark:hover { background: var(--c-bg-sand); color: var(--c-ink); }
+.empresas-mail { margin-top: var(--s-3); font-size: var(--t-sm); }
+.empresas-mail a { color: #EDBE5C; }
+.empresas-mail a:hover { color: #FFFDF8; }
+.empresas a:focus-visible { outline-color: #EDBE5C; }
+
+/* -------------------------------------------------------------
+   13. FAQ (acordeón nativo con <details>)
+   ------------------------------------------------------------- */
+.acordeon { border-top: 1px solid var(--c-line); }
+
+.faq-item { border-bottom: 1px solid var(--c-line); }
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.15rem 2.5rem 1.15rem 0;
+  position: relative;
+  font-family: var(--f-serif);
+  font-size: var(--t-h3);
+  line-height: 1.35;
+  color: var(--c-ink);
+  transition: color .2s var(--ease);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { color: var(--c-gold-deep); }
+
+/* Signo + que rota a × al abrir */
+.faq-item summary::after {
+  content: "";
+  position: absolute;
+  right: .35rem;
+  top: 1.65rem;
+  width: 14px; height: 14px;
+  background:
+    linear-gradient(var(--c-gold-deep), var(--c-gold-deep)) center/14px 2px no-repeat,
+    linear-gradient(var(--c-gold-deep), var(--c-gold-deep)) center/2px 14px no-repeat;
+  transition: transform .3s var(--ease);
+}
+.faq-item[open] summary::after { transform: rotate(135deg); }
+
+.faq-body {
+  padding: 0 2.5rem 1.35rem 0;
+  color: var(--c-ink-soft);
+  font-size: var(--t-sm);
+}
+.faq-item[open] .faq-body { animation: faq-in .28s var(--ease) both; }
+
+@keyframes faq-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* -------------------------------------------------------------
+   14. CONTACTO
+   ------------------------------------------------------------- */
+.contacto { background: var(--c-bg-sand); text-align: center; }
+.contacto-inner { max-width: 40rem; }
+.contacto p { color: #4A423A; }
+.contacto-datos {
+  margin-top: var(--s-4);
+  font-size: var(--t-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+}
+
+/* -------------------------------------------------------------
+   15. FOOTER
+   ------------------------------------------------------------- */
+.site-footer {
+  background: var(--c-bg);
+  border-top: 1px solid var(--c-line);
+  padding-block: var(--s-5) var(--s-4);
+}
+.footer-inner {
+  display: grid;
+  gap: var(--s-4);
+}
+.footer-legal {
+  font-style: normal;
+  font-size: var(--t-sm);
+  line-height: 1.8;
+  color: var(--c-ink-soft);
+}
+.footer-nav ul {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  gap: .5rem;
+  font-size: var(--t-sm);
+}
+.footer-copy {
+  margin: var(--s-4) 0 0;
+  padding-top: var(--s-3);
+  padding-bottom: 60px; /* hueco para el botón flotante de WhatsApp */
+  border-top: 1px solid var(--c-line);
+  text-align: center;
+  font-size: var(--t-xs);
+  color: var(--c-ink-soft);
+}
+
+/* -------------------------------------------------------------
+   16. BOTÓN FLOTANTE WHATSAPP
+   ------------------------------------------------------------- */
+.wa-float {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--c-wa);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 22px rgba(30, 122, 78, .35);
+  transition: transform .25s var(--ease), background-color .25s var(--ease);
+}
+.wa-float svg { width: 28px; height: 28px; fill: #fff; }
+.wa-float:hover { background: var(--c-wa-hover); transform: translateY(-2px); }
+
+/* -------------------------------------------------------------
+   17. PÁGINAS LEGALES (privacidad.html, terminos.html)
+   ------------------------------------------------------------- */
+.legal { padding-block: var(--s-6); }
+.legal-inner { max-width: 46rem; }
+.legal h1 { margin-bottom: var(--s-2); }
+.legal .actualizado {
+  font-size: var(--t-sm);
+  color: var(--c-ink-soft);
+  margin-bottom: var(--s-5);
+}
+.legal h2 {
+  font-size: clamp(1.375rem, 1.2vw + 1.1rem, 1.75rem);
+  margin-top: var(--s-5);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--c-line);
+}
+.legal h3 { font-size: var(--t-h3); margin-top: var(--s-4); }
+.legal p, .legal li { color: var(--c-ink-soft); }
+.legal ul { padding-left: 1.25rem; margin: 0 0 var(--s-3); }
+.legal li { margin-bottom: .5rem; }
+.legal .destacado {
+  background: var(--c-bg-warm);
+  border-left: 3px solid var(--c-gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: var(--s-3) var(--s-4);
+  color: var(--c-ink);
+}
+
+/* -------------------------------------------------------------
+   18. MEDIA QUERIES
+   Mobile-first. Este primer bloque es la excepción: son ajustes
+   hacia abajo para móviles estrechos (iPhone SE, Android de 360px),
+   donde el header no cabe en una sola fila.
+   ------------------------------------------------------------- */
+
+/* --- Móvil muy estrecho: hasta 400px --- */
+@media (max-width: 400px) {
+  .wrap { padding-inline: var(--s-2); }
+
+  /* El logo baja de tamaño para dejar sitio al botón y al menú */
+  .brand-logo { height: 30px; }
+
+  .header-inner { gap: .5rem; }
+
+  /* Titulares y botones grandes, un punto más contenidos */
+  .btn-lg { padding: .95rem 1.35rem; }
+  .hero-ctas .btn-lg { width: 100%; }
+}
+
+/* --- Hasta 899px: un solo botón de WhatsApp, el flotante --- */
+/* Tener el del header y el flotante a la vez duplica el CTA y compite
+   por el pulgar. En móvil gana el flotante (esquina inferior derecha);
+   a partir de 900px se invierte: manda el del header. */
+@media (max-width: 899px) {
+  .btn-header { display: none; }
+}
+
+/* --- Ajustes generales de móvil --- */
+@media (max-width: 599px) {
+  /* Evita que un CTA largo fuerce scroll horizontal */
+  .btn { max-width: 100%; }
+  .miedo, .sonrisa { padding-block: var(--s-6) !important; }
+  .contacto-datos { flex-direction: column; gap: .35rem; }
+  .contacto-datos span[aria-hidden] { display: none; }
+}
+
+/* --- De tablet en adelante --- */
+@media (min-width: 600px) {
+  .miedo-grid { grid-template-columns: repeat(2, 1fr); }
+  .serv-grid  { grid-template-columns: repeat(2, 1fr); column-gap: var(--s-5); }
+  .hero-marks { grid-template-columns: repeat(2, auto); justify-content: start; column-gap: var(--s-4); }
+  .footer-nav ul { grid-auto-flow: column; justify-content: start; gap: var(--s-3); }
+}
+
+@media (min-width: 900px) {
+  :root { --header-h: 76px; }
+
+  /* Navegación horizontal: se oculta el botón hamburguesa */
+  .nav-toggle { display: none; }
+  .nav {
+    display: block;
+    order: 2;
+    flex-basis: auto;
+    margin-inline: auto var(--s-3);
+  }
+  .nav-list {
+    grid-auto-flow: column;
+    gap: var(--s-3);
+    padding: 0;
+    border-top: 0;
+  }
+  .nav-list a { padding: .35rem 0; font-size: var(--t-xs); }
+  .btn-header { order: 3; }
+
+  .miedo-grid { grid-template-columns: repeat(3, 1fr); }
+  .serv-grid  { grid-template-columns: repeat(3, 1fr); }
+  .sedes-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .sonrisa-inner,
+  .historia-inner { grid-template-columns: 1.05fr .95fr; gap: var(--s-6); }
+  /* La foto de la historia va a la izquierda en escritorio */
+  .historia-media { order: 1; }
+  .historia-texto { order: 2; }
+
+  .footer-inner { grid-template-columns: 1fr auto; align-items: start; }
+  .footer-nav ul { grid-auto-flow: row; justify-items: end; }
+
+  .wa-float { display: none; }         /* En escritorio manda el botón del header */
+  .footer-copy { padding-bottom: 0; }  /* Ya no hay flotante que esquivar */
+}
+
+/* -------------------------------------------------------------
+   19. PREFERS-REDUCED-MOTION
+   ------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
