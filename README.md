@@ -84,7 +84,7 @@ Se eliminaron el comodín `A *` y el `A www` que apuntaban a la página de
 parqueo de Bluehost (`66.81.203.198`).
 
 > **Nunca toques los MX ni los TXT.** Son el correo de Zoho
-> (`hola@` y `empresas@`). Borrar uno tumba el correo del dominio.
+> (`hola@`). Borrar uno tumba el correo del dominio.
 
 **Último paso, cuando el DNS propague** (Bluehost avisa de 24-48 h):
 
@@ -194,7 +194,7 @@ Todos están marcados en el código con `<!-- TODO: ... -->` y con un texto amar
       frame de video de 640x464 y se ve suave en pantallas grandes.
 - [ ] **Fotos del consultorio** e **imagen social** `assets/og-dental-angels.jpg` (1200×630).
 - [x] ~~Correo de contacto~~ → ya puestos: `hola@` (general, responsable de datos y
-      derechos ARCO+) y `empresas@` (convenios corporativos).
+      derechos ARCO+). Es el único correo del sitio.
       **Falta crearlos de verdad en el proveedor de correo: Meta comprueba que el correo
       de la política de privacidad reciba mensajes.**
 - [x] ~~Seguros~~ → el sitio dice que se factura en regla para que el paciente pida el
