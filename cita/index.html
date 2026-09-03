@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es-EC">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda tu cita | Dental Angels</title>
+<meta name="description" content="Agenda tu cita en Dental Angels y elige el horario que te quede mejor.">
+<!-- Es un redireccionador, no una página con contenido propio: no debe
+     competir en buscadores con la web ni indexarse. -->
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://dentalangelsecuador.com/">
+<meta name="theme-color" content="#FFFDF8">
+<link rel="icon" href="../assets/favicon.png" type="image/png" sizes="256x256">
+
+<!-- Red de seguridad si el JS falla o tarda. -->
+<meta http-equiv="refresh" content="2;url=https://3df421b532a6b4359a7bff9ce2513d8741552a98.agenda.softwaredentalink.com/agenda?modalidad=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../styles.css">
+
+<!-- Google tag (gtag.js) — GA4 "Dental Angels Web" -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7F4C3ZXB7G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7F4C3ZXB7G');
+</script>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '3500083903485483');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=3500083903485483&amp;ev=PageView&amp;noscript=1" alt=""></noscript>
+
+<script>
+  // Este enlace es el que reparte el bot de WhatsApp y el que va en las fichas
+  // de Google. Al pasar por aquí sabemos cuánta gente llega de verdad a la
+  // agenda, cosa que enlazando directo a Dentalink no se puede medir.
+  (function () {
+    var destino = 'https://3df421b532a6b4359a7bff9ce2513d8741552a98.agenda.softwaredentalink.com/agenda?modalidad=1';
+    var origen = new URLSearchParams(location.search).get('de') || 'directo';
+
+    try {
+      gtag('event', 'clic_agendar', { origen: origen });
+      fbq('trackCustom', 'ClicAgendar', { origen: origen });
+    } catch (e) { /* si el tracking falla, la cita manda: se sigue igual */ }
+
+    // replace() y no href: así el botón "atrás" del navegador no devuelve
+    // al paciente a esta página y lo deja rebotando.
+    setTimeout(function () { location.replace(destino); }, 250);
+  })();
+</script>
+</head>
+<body>
+
+<main id="contenido" class="legal">
+  <div class="wrap legal-inner">
+    <h1>Te llevamos a la agenda…</h1>
+    <p>
+      Un segundo. Si no pasa nada,
+      <a href="https://3df421b532a6b4359a7bff9ce2513d8741552a98.agenda.softwaredentalink.com/agenda?modalidad=1">entra aquí para agendar tu cita</a>.
+    </p>
+  </div>
+</main>
+
+</body>
+</html>
