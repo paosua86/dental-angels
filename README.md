@@ -127,7 +127,7 @@ que va en el `<head>` de `index.html`, justo debajo del `<title>`.
 | Direcciones, horarios y mapas | `index.html`, `<section class="sedes">` — un `<article class="sede-card">` por sede |
 | Convenios corporativos | `index.html`, `<section class="empresas">` |
 | Preguntas frecuentes | `index.html`, `<div class="acordeon">` — cada pregunta es un `<details class="faq-item">` |
-| Footer legal (SRI) | bloque `<footer class="site-footer">` en **las tres** páginas. **No reescribir: debe coincidir carácter por carácter con el certificado del SRI.** |
+| Footer | bloque `<footer class="site-footer">` en index, gracias, privacidad y términos: logo, contacto, enlaces legales y crédito. Desde oct-2026 ya no lleva nombre, RUC ni dirección; esos datos viven en `privacidad.html` (sección 1) y `terminos.html`. |
 | Colores, tipografías, espaciados | `styles.css`, sección **1. TOKENS** (variables `--c-*`, `--f-*`, `--s-*`) |
 | Textos legales | `privacidad.html` y `terminos.html` |
 
@@ -189,9 +189,8 @@ Todos están marcados en el código con `<!-- TODO: ... -->` y con un texto amar
 - [x] ~~Mapas y coordenadas~~ → embebidos sin API key y con `hasMap` en el JSON-LD.
 - [ ] **Nombres completos y especialidades de las doctoras** (y del resto del equipo)
       → sección historia. Considerar añadir un bloque de equipo.
-- [ ] **Foto de las doctoras sin decoración navideña** → la actual
-      (`assets/dras-juntas.webp`) tiene espumillón de Navidad de fondo. Sirve para salir,
-      pero conviene cambiarla o el sitio se ve viejo en marzo.
+- [x] ~~Foto de las doctoras sin decoración navideña~~ → `assets/dras-historia.webp` (oct-2026).
+      Original en `Proyectos/dental-angels/fotos/`.
 - [ ] **Foto de sonrisa en mejor resolución** → la actual (`assets/sonrisa.webp`) sale de un
       frame de video de 640x464 y se ve suave en pantallas grandes.
 - [ ] **Fotos del consultorio** e **imagen social** `assets/og-dental-angels.jpg` (1200×630).
@@ -214,7 +213,7 @@ Todos están marcados en el código con `<!-- TODO: ... -->` y con un texto amar
 
 - [ ] Ningún `PENDIENTE` amarillo visible en la página.
 - [ ] `grep -rn "TODO:" .` no devuelve nada crítico.
-- [ ] El footer coincide **carácter por carácter** con el certificado del SRI.
+- [ ] Los datos del responsable en `privacidad.html` coinciden con el certificado del SRI.
 - [ ] `privacidad.html` carga en HTTPS y su URL es la que se pega en la App de WhatsApp
       Cloud API (*App Dashboard → Settings → Basic → Privacy Policy URL*).
 - [ ] El correo de contacto de la política existe y alguien lo lee.

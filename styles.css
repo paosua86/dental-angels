@@ -603,11 +603,18 @@ main > section { padding-block: var(--s-6); }
   display: grid;
   gap: var(--s-4);
 }
-.footer-legal {
-  font-style: normal;
+.footer-logo { height: 34px; width: auto; }
+.footer-slogan {
+  margin: var(--s-1) 0 var(--s-3);
   font-size: var(--t-sm);
-  line-height: 1.8;
   color: var(--c-ink-soft);
+}
+.footer-contacto {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  gap: .4rem;
+  font-size: var(--t-sm);
 }
 .footer-nav ul {
   list-style: none;
@@ -617,14 +624,21 @@ main > section { padding-block: var(--s-6); }
   font-size: var(--t-sm);
 }
 .footer-copy {
-  margin: var(--s-4) 0 0;
+  margin-top: var(--s-4);
   padding-top: var(--s-3);
   padding-bottom: 60px; /* hueco para el botón flotante de WhatsApp */
   border-top: 1px solid var(--c-line);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .25rem var(--s-3);
   text-align: center;
   font-size: var(--t-xs);
   color: var(--c-ink-soft);
 }
+.footer-copy p { margin: 0; }
+.footer-copy a { color: var(--c-ink-soft); }
+.footer-copy a:hover { color: var(--c-gold-deep); }
 
 /* -------------------------------------------------------------
    16. BOTÓN FLOTANTE WHATSAPP
@@ -754,7 +768,7 @@ main > section { padding-block: var(--s-6); }
   .footer-nav ul { grid-auto-flow: row; justify-items: end; }
 
   .wa-float { display: none; }         /* En escritorio manda el botón del header */
-  .footer-copy { padding-bottom: 0; }  /* Ya no hay flotante que esquivar */
+  .footer-copy { padding-bottom: 0; justify-content: space-between; }  /* Ya no hay flotante que esquivar */
 }
 
 /* Entre 900 y 1149px Poppins y el logo horizontal no caben con el aire completo:
