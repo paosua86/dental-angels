@@ -191,8 +191,8 @@ Todos están marcados en el código con `<!-- TODO: ... -->` y con un texto amar
       → sección historia. Considerar añadir un bloque de equipo.
 - [x] ~~Foto de las doctoras sin decoración navideña~~ → `assets/dras-historia.webp` (oct-2026).
       Original en `Proyectos/dental-angels/fotos/`.
-- [ ] **Foto de sonrisa en mejor resolución** → la actual (`assets/sonrisa.webp`) sale de un
-      frame de video de 640x464 y se ve suave en pantallas grandes.
+- [x] ~~Foto de sonrisa en mejor resolución~~ → `assets/sonrisa-perfil.webp` (oct-2026), 1024x1294.
+      Original en `Proyectos/dental-angels/fotos/`.
 - [ ] **Fotos del consultorio** e **imagen social** `assets/og-dental-angels.jpg` (1200×630).
 - [x] ~~Correo de contacto~~ → ya puestos: `hola@` (general, responsable de datos y
       derechos ARCO+). Es el único correo del sitio.
