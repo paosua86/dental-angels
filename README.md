@@ -9,8 +9,11 @@ privacidad.html     Política de privacidad (LOPDP) — obligatoria para WhatsAp
 terminos.html       Términos de uso
 styles.css          Todo el CSS, comentado por secciones numeradas
 script.js           Solo menú móvil (el FAQ usa <details> nativo)
-assets/logo.png     Logo oficial, recortado y con fondo transparente (343x88, se muestra a 38px de alto)
-assets/favicon.png  Favicon: el diente con la aureola, sobre fondo marfil (256x256)
+assets/logo.svg     Logo horizontal del rebranding (oct-2026), exportado del .ai sin fondo; se muestra a 38px de alto
+assets/logo.png     El mismo logo en PNG transparente (391x88), por si algo externo lo pide
+assets/isotipo.svg  Isotipo (muela + aureola): favicon vectorial
+assets/favicon.png  Favicon PNG: el isotipo sobre blanco hueso (256x256)
+assets/og-dental-angels-v2.jpg  Imagen para redes 1200x630 (nombre nuevo para que WhatsApp/Facebook no sirvan la vieja de caché)
 assets/apple-touch-icon.png   Icono para iOS (180x180)
 CNAME               Dominio propio para GitHub Pages
 .nojekyll           Evita que GitHub procese el sitio con Jekyll
@@ -177,10 +180,9 @@ Todos están marcados en el código con `<!-- TODO: ... -->` y con un texto amar
 
 **Buscar con:** `grep -rn "TODO:" .` o `grep -rn "PENDIENTE" .`
 
-- [ ] **Logo vectorial**: solo había `.ai` y `.png`, así que el sitio usa el PNG recortado.
-      Funciona bien, pero si consigues un `.svg` exportado desde el `.ai`, cámbialo:
-      pesa menos y se ve nítido en pantallas retina. Los colores ya salen del logo
-      (`#DBA628` dorado, `#231F20` tinta) en la sección 1 de `styles.css`.
+- [x] ~~Logo vectorial~~ → rebranding de oct-2026 (Mava Studio): `assets/logo.svg` exportado del `.ai`.
+      Paleta del brandbook en la sección 1 de `styles.css` (`#CEAA5C` amarillo luz, `#3D3D3B` grafito,
+      `#F7F6F2` hueso, `#E8E2D7` arena, `#AAA8A2` gris cálido).
 - [x] ~~Dirección de Ambato~~ → Calle Salvador 5-19 y México, parroquia La Merced.
 - [x] ~~Horarios~~ → Quito L-V 10:00-18:00 · Ambato L-V 9:00-13:00 y 15:00-18:00.
       **Verificar si abren sábados**: ahora mismo el sitio dice que no.
@@ -231,7 +233,7 @@ Todos están marcados en el código con `<!-- TODO: ... -->` y con un texto amar
   funciona aunque el JS falle.
 - **JS**: solo el menú móvil, cargado con `defer`. Si se elimina el menú, se puede borrar
   `script.js` entero.
-- **Fuentes**: Fraunces (serif, titulares) e Inter (sans, cuerpo), con `display=swap` y
-  `preconnect`. Fallbacks reales declarados en `--f-serif` y `--f-sans`.
+- **Fuentes** (brandbook): Plus Jakarta Sans (titulares) y Poppins (cuerpo), con `display=swap` y
+  `preconnect`. Fallbacks en `--f-display` y `--f-sans`. Neuropol y la manuscrita solo viven dentro del logo.
 - El botón flotante de WhatsApp se oculta en escritorio (≥900 px) porque el del header
   ya está siempre visible.

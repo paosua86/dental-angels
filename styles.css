@@ -25,27 +25,30 @@
 
 /* -------------------------------------------------------------
    1. TOKENS
-   Paleta cálida: marfil, arena, dorado apagado. Cero azul clínico.
+   Paleta del rebranding (Brandbook oct-2026, Mava Studio): blanco hueso,
+   arena, gris cálido, grafito y amarillo luz. Cero azul clínico.
    ------------------------------------------------------------- */
 :root {
   /* Color */
-  --c-bg:          #FFFDF8;  /* marfil, fondo principal */
-  --c-bg-warm:     #FCF5E8;  /* crema, secciones alternas */
-  --c-bg-sand:     #F8EBD2;  /* arena, bloques destacados */
-  --c-ink:         #231F20;  /* tinta del logo — texto principal (contraste 15:1 sobre marfil) */
-  --c-ink-soft:    #5C544A;  /* texto secundario (contraste 7:1) */
-  --c-gold:        #DBA628;  /* dorado exacto del logo (solo para superficies, no para texto) */
-  --c-gold-deep:   #8A6410;  /* dorado oscurecido: el del logo no llega a AA en texto */
-  --c-gold-tint:   #F0DEB4;  /* bordes y separadores */
+  --c-bg:          #F7F6F2;  /* blanco hueso, fondo principal */
+  --c-bg-warm:     #EFEBE3;  /* entre hueso y arena, secciones alternas */
+  --c-bg-sand:     #E8E2D7;  /* arena, bloques destacados */
+  --c-ink:         #3D3D3B;  /* grafito — texto principal (contraste 10:1 sobre hueso) */
+  --c-ink-soft:    #5E5C57;  /* gris cálido oscurecido para texto secundario (5,2:1 sobre arena) */
+  --c-grey:        #AAA8A2;  /* gris cálido de marca (solo bordes y adornos, no texto) */
+  --c-gold:        #CEAA5C;  /* amarillo luz exacto (solo superficies, no para texto) */
+  --c-gold-deep:   #7A5F22;  /* amarillo luz oscurecido: el de marca no llega a AA en texto */
+  --c-gold-tint:   #E4D6B6;  /* bordes y separadores */
   --c-wa:          #1E7A4E;  /* verde WhatsApp oscurecido para contraste AA */
   --c-wa-hover:    #17603D;
-  --c-line:        #EBE0CD;
+  --c-line:        #DFDAD0;
   --c-todo-bg:     #FFF2C9;
   --c-todo-ink:    #6B4E00;
 
-  /* Tipografía */
-  --f-serif: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
-  --f-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Tipografía: Plus Jakarta Sans (principal, titulares) y Poppins (secundaria, cuerpo).
+     Neuropol y la manuscrita son solo del logotipo: van dentro del SVG, no se cargan. */
+  --f-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --f-sans:    "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   /* Escala fluida */
   --t-xs:  0.8125rem;
@@ -67,7 +70,7 @@
 
   --radius: 14px;
   --radius-lg: 22px;
-  --shadow-soft: 0 1px 2px rgba(44, 40, 35, .04), 0 10px 30px rgba(44, 40, 35, .06);
+  --shadow-soft: 0 1px 2px rgba(61, 61, 59, .04), 0 10px 30px rgba(61, 61, 59, .06);
   --ease: cubic-bezier(.22, .61, .36, 1);
   --header-h: 68px;
 }
@@ -98,17 +101,17 @@ body {
 img, svg { max-width: 100%; display: block; }
 
 h1, h2, h3 {
-  font-family: var(--f-serif);
-  font-weight: 600;
+  font-family: var(--f-display);
+  font-weight: 700;
   line-height: 1.15;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   margin: 0 0 var(--s-3);
   text-wrap: balance;
 }
 
 h1 { font-size: var(--t-h1); }
 h2 { font-size: var(--t-h2); }
-h3 { font-size: var(--t-h3); line-height: 1.25; }
+h3 { font-size: var(--t-h3); line-height: 1.25; font-weight: 600; }
 
 p { margin: 0 0 var(--s-3); }
 p:last-child { margin-bottom: 0; }
@@ -208,7 +211,7 @@ main > section { padding-block: var(--s-6); }
 .btn-ghost:hover { background: var(--c-bg-sand); color: var(--c-ink); }
 
 .btn-dark { background: var(--c-ink); color: #fff; }
-.btn-dark:hover { background: #191612; color: #fff; transform: translateY(-1px); }
+.btn-dark:hover { background: #2B2B29; color: #fff; transform: translateY(-1px); }
 
 .btn .ico { width: 18px; height: 18px; fill: currentColor; flex: none; }
 
@@ -219,7 +222,7 @@ main > section { padding-block: var(--s-6); }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 253, 248, .92);
+  background: rgba(247, 246, 242, .92);
   backdrop-filter: saturate(140%) blur(8px);
   border-bottom: 1px solid var(--c-line);
 }
@@ -289,7 +292,7 @@ main > section { padding-block: var(--s-6); }
    ------------------------------------------------------------- */
 .hero {
   background:
-    radial-gradient(120% 90% at 85% -10%, var(--c-bg-sand) 0%, rgba(248,235,210,0) 62%),
+    radial-gradient(120% 90% at 85% -10%, var(--c-bg-sand) 0%, rgba(232,226,215,0) 62%),
     var(--c-bg);
   padding-block: var(--s-6) var(--s-6);
   border-bottom: 1px solid var(--c-line);
@@ -395,7 +398,7 @@ main > section { padding-block: var(--s-6); }
   gap: var(--s-5);
   align-items: center;
 }
-.sonrisa-texto p { color: #4A423A; }
+.sonrisa-texto p { color: var(--c-ink-soft); }
 .sonrisa-lista {
   list-style: none;
   margin: var(--s-3) 0 var(--s-4);
@@ -424,8 +427,9 @@ main > section { padding-block: var(--s-6); }
 }
 .historia-texto p { color: var(--c-ink-soft); }
 .historia-cita {
-  font-family: var(--f-serif);
+  font-family: var(--f-display);
   font-size: var(--t-lg);
+  font-weight: 500;
   color: var(--c-ink) !important;
   border-left: 3px solid var(--c-gold);
   padding-left: var(--s-3);
@@ -454,7 +458,7 @@ main > section { padding-block: var(--s-6); }
   place-items: center;
   text-align: center;
   background: repeating-linear-gradient(
-    45deg, #F2E7D6, #F2E7D6 12px, #EDE0CB 12px, #EDE0CB 24px);
+    45deg, #EFEBE3, #EFEBE3 12px, #E8E2D7 12px, #E8E2D7 24px);
   border: 1px dashed var(--c-gold);
   border-radius: var(--radius-lg);
   color: var(--c-todo-ink);
@@ -507,22 +511,22 @@ main > section { padding-block: var(--s-6); }
    ------------------------------------------------------------- */
 .empresas {
   background: var(--c-ink);
-  color: #F3EDE3;
+  color: var(--c-bg);
 }
 .empresas-inner { max-width: 46rem; }
-.empresas .eyebrow { color: #EDBE5C; }
-.empresas h2 { color: #FFFDF8; }
-.empresas p { color: #D7CFC3; }
+.empresas .eyebrow { color: var(--c-gold); }  /* 4,9:1 sobre grafito */
+.empresas h2 { color: var(--c-bg); }
+.empresas p { color: #D2CFC8; }
 .empresas .btn-dark {
-  background: #FFFDF8;
+  background: var(--c-bg);
   color: var(--c-ink);
   margin-top: var(--s-2);
 }
 .empresas .btn-dark:hover { background: var(--c-bg-sand); color: var(--c-ink); }
 .empresas-mail { margin-top: var(--s-3); font-size: var(--t-sm); }
-.empresas-mail a { color: #EDBE5C; }
-.empresas-mail a:hover { color: #FFFDF8; }
-.empresas a:focus-visible { outline-color: #EDBE5C; }
+.empresas-mail a { color: var(--c-gold); }
+.empresas-mail a:hover { color: var(--c-bg); }
+.empresas a:focus-visible { outline-color: var(--c-gold); }
 
 /* -------------------------------------------------------------
    13. FAQ (acordeón nativo con <details>)
@@ -536,8 +540,9 @@ main > section { padding-block: var(--s-6); }
   cursor: pointer;
   padding: 1.15rem 2.5rem 1.15rem 0;
   position: relative;
-  font-family: var(--f-serif);
+  font-family: var(--f-display);
   font-size: var(--t-h3);
+  font-weight: 600;
   line-height: 1.35;
   color: var(--c-ink);
   transition: color .2s var(--ease);
@@ -576,7 +581,7 @@ main > section { padding-block: var(--s-6); }
    ------------------------------------------------------------- */
 .contacto { background: var(--c-bg-sand); text-align: center; }
 .contacto-inner { max-width: 40rem; }
-.contacto p { color: #4A423A; }
+.contacto p { color: var(--c-ink-soft); }
 .contacto-datos {
   margin-top: var(--s-4);
   font-size: var(--t-sm);
@@ -681,7 +686,7 @@ main > section { padding-block: var(--s-6); }
   .wrap { padding-inline: var(--s-2); }
 
   /* El logo baja de tamaño para dejar sitio al botón y al menú */
-  .brand-logo { height: 30px; }
+  .brand-logo { height: 34px; }
 
   .header-inner { gap: .5rem; }
 
@@ -732,7 +737,7 @@ main > section { padding-block: var(--s-6); }
     padding: 0;
     border-top: 0;
   }
-  .nav-list a { padding: .35rem 0; font-size: var(--t-xs); }
+  .nav-list a { padding: .35rem 0; font-size: var(--t-xs); white-space: nowrap; }
   .btn-header { order: 3; }
 
   .miedo-grid { grid-template-columns: repeat(3, 1fr); }
@@ -750,6 +755,15 @@ main > section { padding-block: var(--s-6); }
 
   .wa-float { display: none; }         /* En escritorio manda el botón del header */
   .footer-copy { padding-bottom: 0; }  /* Ya no hay flotante que esquivar */
+}
+
+/* Entre 900 y 1149px Poppins y el logo horizontal no caben con el aire completo:
+   se aprieta el menú para que ningún enlace se parta en dos líneas. */
+@media (min-width: 900px) and (max-width: 1149px) {
+  .nav { margin-inline: auto var(--s-2); }
+  .nav-list { gap: .9rem; }
+  .nav-list a { font-size: .75rem; }
+  .btn-header { padding: .7rem .9rem; }
 }
 
 /* -------------------------------------------------------------
